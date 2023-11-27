@@ -3,9 +3,11 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/Authprovider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const Login = () => {
+    const axiosPublic = useAxiosPublic();
     const { signInWithGoogle, signIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -13,7 +15,24 @@ const Login = () => {
     const handleSignInWithGoogle = () => {
         signInWithGoogle()
             .then(result => {
+                console.log(result.user)
                 if(result.user){
+                    const userInfo = {
+                       
+                        name: result.user.displayName,
+                        email: result.user.email,
+                        
+                        Role: 'User'
+
+                    }
+                    console.log(userInfo)
+                    axiosPublic.post('/users', userInfo)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                                console.log('user added to the database')
+                            }
+                        })
+
                     Swal.fire({
                         title: 'User Login Successful.',
                         showClass: {
@@ -23,10 +42,11 @@ const Login = () => {
                             popup: 'animate__animated animate__fadeOutUp'
                         }
                     });
+                    navigate(location?.state ? location.state : '/');
                 }
                
                 
-                navigate(location?.state ? location.state : '/');
+                
 
             })
             .catch(error => {

@@ -33,7 +33,7 @@ const SignUp = () => {
                             .then(res => {
                                 if (res.data.insertedId) {
                                     console.log('user added to the database')
-                                    reset();
+                                   
                                     Swal.fire({
                                         position: 'top-end',
                                         icon: 'success',
@@ -41,7 +41,9 @@ const SignUp = () => {
                                         showConfirmButton: false,
                                         timer: 1500
                                     });
-                                    navigate('/');
+                                    reset();
+                                    navigate(location?.state ? location.state : '/');
+                                    window.location.reload(true)
                                 }
                             })
 

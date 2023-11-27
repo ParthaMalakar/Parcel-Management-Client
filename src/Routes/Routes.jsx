@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard";
 import PrivateRoute from "./PrivateRoute";
+import BookParcel from "../pages/Dashboard/User/BookParcel/BookParcel";
 
 
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         path: 'userHome',
         element: <Home></Home>
       },
+      {
+        path:'book',
+        element:<BookParcel></BookParcel>
+      }
       
 
       // admin only routes

@@ -1,11 +1,12 @@
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaMarkdown, FaSearch, FaShoppingCart, FaStreetView, FaUsers, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import Navbar from "../pages/Shared/Navbar/Navbar";
 import Footer from "../pages/Shared/Footer/Footer";
 import useUser from "../hooks/useUser";
 import useDelivary from "../hooks/useDelivary";
-
+import { MdOutlineClearAll } from "react-icons/md";
+import { TbPlaystationSquare } from "react-icons/tb";
 
 const Dashboard = () => {
 
@@ -16,98 +17,85 @@ const Dashboard = () => {
     const [isDelivary, isDelivaryLoading] = useDelivary();
     return (
         <div>
-            <Navbar></Navbar>
+            {/* <Navbar></Navbar> */}
             <div className="flex">
                 {/* dashboard side bar */}
-                <div className="w-64 min-h-screen bg-orange-400">
+                <div className="w-64 min-h-screen bg-amber-300">
                     <ul className="menu p-4">
                         {
-                            isAdmin && isAdminLoading &&
+                            isAdmin &&
                             <>
                                 <li>
-                                    <NavLink to="/dashboard/adminHome">
+                                    <NavLink className=" text-lg" to="/dashboard/adminHome">
                                         <FaHome></FaHome>
                                         Admin Home</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/addItems">
-                                        <FaUtensils></FaUtensils>
-                                        Add Items</NavLink>
+                                    <NavLink className=" text-lg" to="/dashboard/addItems">
+                                       <MdOutlineClearAll></MdOutlineClearAll>
+                                        All Parcels</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/manageItems">
-                                        <FaList></FaList>
-                                        Manage Items</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/bookings">
-                                        <FaBook></FaBook>
-                                        Manage Bookings</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/dashboard/users">
-                                        <FaUsers></FaUsers>
+                                    <NavLink className=" text-lg" to="/dashboard/manageItems">
+                                    <FaUsers></FaUsers>
                                         All Users</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="text-lg" to="/dashboard/bookings">
+                                    <FaUsers></FaUsers>
+                                        All Delivery Men</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className=" text-lg" to="/dashboard/users">
+                                        <TbPlaystationSquare></TbPlaystationSquare>
+                                        Statistics</NavLink>
                                 </li>
                             </>
 
                         }
-                        { isUser && isUserLoading &&
+                        { isUser  &&
                             <>
                                 <li>
-                                    <NavLink to="/dashboard/userHome">
+                                    <NavLink className=" text-lg" to="/dashboard/userHome">
                                         <FaHome></FaHome>
                                         User Home</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/history">
-                                        <FaCalendar></FaCalendar>
-                                        Not History</NavLink>
+                                    <NavLink className=" text-lg" to="/dashboard/book">
+                                        <FaBook></FaBook>
+                                        Book a Parcel</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/cart">
-                                        <FaShoppingCart></FaShoppingCart>
-                                        My Cart </NavLink>
+                                    <NavLink className=" text-lg" to="/dashboard/cart">
+                                        <FaMarkdown></FaMarkdown>
+                                        My Parcels </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/review">
+                                    <NavLink className=" text-lg" to="/dashboard/review">
                                         <FaAd></FaAd>
-                                        Add a Review</NavLink>
+                                        My Profile</NavLink>
                                 </li>
-                                <li>
-                                    <NavLink to="/dashboard/paymentHistory">
-                                        <FaList></FaList>
-                                        Real Payment History</NavLink>
-                                </li>
+                               
                             </>
                         }
                         { isDelivary && 
                         <>
                         <li>
-                            <NavLink to="/dashboard/userHome">
+                            <NavLink className=" text-lg" to="/dashboard/userHome">
                                 <FaHome></FaHome>
                                 Delavary man Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/history">
+                            <NavLink className=" text-lg" to="/dashboard/history">
                                 <FaCalendar></FaCalendar>
-                                Not History</NavLink>
+                                My Delivery List</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/cart">
-                                <FaShoppingCart></FaShoppingCart>
-                                My Cart </NavLink>
+                            <NavLink className=" text-lg" to="/dashboard/cart">
+                                <FaStreetView></FaStreetView>
+                                My Review </NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/dashboard/review">
-                                <FaAd></FaAd>
-                                Add a Review</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/paymentHistory">
-                                <FaList></FaList>
-                                Real Payment History</NavLink>
-                        </li>
+                        
                     </>
 
 
@@ -136,7 +124,7 @@ const Dashboard = () => {
                     <Outlet></Outlet>
                 </div>
             </div>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </div>
     );
 };
