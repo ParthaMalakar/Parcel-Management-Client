@@ -3,6 +3,8 @@ import Main from "../Layout/Main";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import Dashboard from "../Layout/Dashboard";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -26,5 +28,20 @@ const router = createBrowserRouter([
         
     ]
 },
+{
+    path: 'dashboard',
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    children: [
+      // normal user routes
+      {
+        path: 'userHome',
+        element: <Home></Home>
+      },
+      
+
+      // admin only routes
+      
+    ]
+  }
 ]);
 export default router;
