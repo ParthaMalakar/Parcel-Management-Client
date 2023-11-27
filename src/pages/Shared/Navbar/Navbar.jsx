@@ -1,8 +1,12 @@
 import {  Link, NavLink } from "react-router-dom";
 import logo from '../../../assets/logo.png'
 import { MdNotifications } from "react-icons/md";
+import { AuthContext } from "../../../provider/Authprovider";
+import { useContext } from "react";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
     const navLinks = <>
         <li><NavLink className="font-semibold text-lg" to="/">Home</NavLink></li>
 
@@ -10,7 +14,17 @@ const Navbar = () => {
         <li><NavLink className="font-semibold text-3xl" to="/notification"><MdNotifications></MdNotifications></NavLink></li>
         <li><NavLink className=" font-semibold text-lg" to="/about">About Us</NavLink></li>
     </>
-   
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire(
+                    'Logout success!',
+                    'You clicked the button!',
+                    'success'
+                )
+            })
+            .catch()
+    }
     return (
         <div>
             <div className="navbar bg-base-100 ">
@@ -35,12 +49,23 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                {
+                        user ? <div className=" md:flex items-center ">
+                            <div className="dropdown mr-36">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle">
+                                <img  className="ml-40 md:ml-0 w-52 h-11 md:h-14 rounded-full" src={user.photoURL} alt="" />
+                                </label>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 mx-auto  z-[1] p-2 shadow bg-base-100 rounded-box w-44">
+                                <p className="hover:bg-amber-300 font-semibold ml-3 p-2 mb-4 bg-gray-300 rounded-xl">{user.displayName}</p>
+                                <NavLink className="hover:bg-amber-300 font-semibold ml-3 p-2 mb-4 bg-gray-300 rounded-xl" to="/dashboard">Dashboard</NavLink>
+                                    <Link  onClick={handleSignOut} className="hover:bg-amber-300 font-semibold ml-3 p-2 mb-4 bg-gray-300 rounded-xl"><a> Log Out</a></Link>
+                                </ul>
+                            </div>
+                        </div>
 
-                <Link to="/login" className="py-2 px-6 rounded-lg  bg-slate-600 text-white text-lg font-semibold mr-10">Login</Link>
-
-
-
-
+                            :
+                            <Link to="/login" className="py-2 px-6 rounded-lg  bg-slate-600 text-white text-lg font-semibold mr-10">Login</Link>
+                    }
 
                 </div>
 
