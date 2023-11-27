@@ -6,6 +6,8 @@ import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import BookParcel from "../pages/Dashboard/User/BookParcel/BookParcel";
+import MyParcel from "../pages/Dashboard/User/MyParcel/MyParcel";
+import ParcelDetails from "../pages/Dashboard/User/MyParcel/ParcelDetails";
 
 
 
@@ -42,7 +44,16 @@ const router = createBrowserRouter([
         path:'book',
         element:<BookParcel></BookParcel>
       }
-      
+      ,{
+        path:'parcel',
+        element:<MyParcel></MyParcel>
+      },
+      {
+        path:'details/:id',
+        element:<ParcelDetails></ParcelDetails>,
+        loader:({params})=>fetch(`http://localhost:5000/parceldetail/${params.id}`)
+
+      }
 
       // admin only routes
       

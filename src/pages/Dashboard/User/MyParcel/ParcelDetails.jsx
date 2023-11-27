@@ -1,34 +1,30 @@
-import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAxiosPublic from '../../../../hooks/useAxiosPublic';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { FaAddressBook, FaUtensils } from 'react-icons/fa';
 import { AuthContext } from '../../../../provider/Authprovider';
-
-const BookParcel = () => {
+import { useLoaderData } from 'react-router-dom';
+import { useState } from 'react';
+const ParcelDetails = () => {
+    const parcel = useLoaderData()
     const { register, handleSubmit, reset } = useForm();
     const [price, setPrice] = useState(0);
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
-    const { user } = useContext(AuthContext);
-    console.log(user)
     const onSubmit = async (data) => {
-        data.price=price;
-        data.bookingDate = new Date();
-        data.status = "pending";
-        reset();
+        
         console.log(data)
        
-            const menuRes = await axiosSecure.post('/parcel', data);
+            const menuRes = await axiosSecure.patch(`/parcel/${parcel._id}`, data);
             console.log(menuRes.data)
-            if(menuRes.data.insertedId){
+            if(menuRes.data.modifiedCount){
                 // show success popup
                 reset();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: `parcel is added to the menu.`,
+                    title: `parcel is Updated.`,
                     showConfirmButton: false,
                     timer: 1500
                   });
@@ -51,10 +47,7 @@ const BookParcel = () => {
         setPrice(newPrice);
     };
     return (
-        <div className='bg-cyan-500 pt-10 pb-4'>
-           <div className="mx-auto text-center md:w-4/12 my-8">
-                <p className="text-gray-600 mb-2 text-3xl"><i>---Book a Parcel---</i></p>
-            </div>
+        <div>
             <div className='w-1/2 mx-auto'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full my-2">
@@ -65,7 +58,7 @@ const BookParcel = () => {
                             type="text"
                             placeholder="Name"
                             readOnly
-                            defaultValue={user.displayName}
+                            defaultValue={parcel.name}
                             {...register('name', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -78,7 +71,7 @@ const BookParcel = () => {
                             type="email"
                             placeholder="Email"
                             readOnly
-                            defaultValue={user.email}
+                            defaultValue={parcel.Email}
                             {...register('Email', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -90,6 +83,7 @@ const BookParcel = () => {
                         <input
                             type="text"
                             placeholder="Phone Number"
+                            defaultValue={parcel.phone}
                             {...register('phone', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -101,6 +95,7 @@ const BookParcel = () => {
                         <input
                             type="text"
                             placeholder="Parcel Type"
+                            defaultValue={parcel.type}
                             {...register('type', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -112,6 +107,7 @@ const BookParcel = () => {
                         <input
                             type="number"
                             placeholder="Parcel Weight"
+                            defaultValue={parcel.weight}
                             {...register('weight', { required: true })}
                             onChange={(e) => {
                                 register('weight').onChange(e);
@@ -128,6 +124,7 @@ const BookParcel = () => {
                         <input
                             type="text"
                             placeholder="Receiver’s Name"
+                            defaultValue={parcel.ReceiverName}
                             {...register('ReceiverName', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -139,6 +136,7 @@ const BookParcel = () => {
                         <input
                             type="text"
                             placeholder="Receiver's Phone Number"
+                            defaultValue={parcel.ReceiverPhone}
                             {...register('ReceiverPhone', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -150,6 +148,7 @@ const BookParcel = () => {
                         <input
                             type="text"
                             placeholder="Parcel Delivery Address"
+                            defaultValue={parcel.parcelAddress}
                             {...register('parcelAddress', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -161,6 +160,7 @@ const BookParcel = () => {
                         <input
                             type="date"
                             placeholder="Requested Delivery Date"
+                            defaultValue={parcel.parcelDate}
                             {...register('parcelDate', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -173,6 +173,7 @@ const BookParcel = () => {
                         <input
                             type="text"
                             placeholder="Delivery Address Latitude"
+                            defaultValue={parcel.Latitude}
                             {...register('Latitude', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -184,6 +185,7 @@ const BookParcel = () => {
                         <input
                             type="text"
                             placeholder="Delivery Address longitude"
+                            defaultValue={parcel.longitude}
                             {...register('longitude', { required: true })}
                             required
                             className="input input-bordered w-full" />
@@ -196,6 +198,7 @@ const BookParcel = () => {
                             type="text"
                             placeholder="Price"
                             value={`${price}Tk`}
+                            defaultValue={parcel.price}
                             readOnly
                             {...register('price', { required: true })}
                             required
@@ -203,7 +206,7 @@ const BookParcel = () => {
                         />
                     </div> 
                     <button className="btn text-center w-full ">
-                        Add Parcel <FaAddressBook className="ml-4"></FaAddressBook>
+                        Update Parcel <FaAddressBook className="ml-4"></FaAddressBook>
                     </button>
                 </form>
             </div>
@@ -211,4 +214,4 @@ const BookParcel = () => {
     );
 };
 
-export default BookParcel;
+export default ParcelDetails;

@@ -66,7 +66,7 @@ const Dashboard = () => {
                                         Book a Parcel</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className=" text-lg" to="/dashboard/cart">
+                                    <NavLink className=" text-lg" to="/dashboard/parcel">
                                         <FaMarkdown></FaMarkdown>
                                         My Parcels </NavLink>
                                 </li>
