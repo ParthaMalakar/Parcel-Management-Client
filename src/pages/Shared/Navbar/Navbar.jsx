@@ -4,13 +4,15 @@ import { MdNotifications } from "react-icons/md";
 import { AuthContext } from "../../../provider/Authprovider";
 import { useContext } from "react";
 import Swal from "sweetalert2";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = () => {
+    const [isAdmin, isAdminLoading] = useAdmin();
     const { user, logOut } = useContext(AuthContext);
     const navLinks = <>
         <li><NavLink className="font-semibold text-lg" to="/">Home</NavLink></li>
 
-        <li><NavLink className="font-semibold text-lg" to="/dashboard">Dashboard</NavLink></li>
+        <li><NavLink className="font-semibold text-lg" to={isAdmin?'dashboard/statistics':'dashboard'}>Dashboard</NavLink></li>
         <li><NavLink className="font-semibold text-3xl" to="/notification"><MdNotifications></MdNotifications></NavLink></li>
         <li><NavLink className=" font-semibold text-lg" to="/about">About Us</NavLink></li>
     </>

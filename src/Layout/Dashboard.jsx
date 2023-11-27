@@ -46,7 +46,8 @@ const Dashboard = () => {
                                         All Delivery Men</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className=" text-lg" to="/dashboard/users">
+                                    <NavLink 
+                                     className=" text-lg" to="/dashboard/statistics">
                                         <TbPlaystationSquare></TbPlaystationSquare>
                                         Statistics</NavLink>
                                 </li>

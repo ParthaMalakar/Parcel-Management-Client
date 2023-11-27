@@ -10,6 +10,7 @@ import MyParcel from "../pages/Dashboard/User/MyParcel/MyParcel";
 import ParcelDetails from "../pages/Dashboard/User/MyParcel/ParcelDetails";
 import Profile from "../pages/Dashboard/User/Profile/Profile";
 import UserHome from "../pages/Dashboard/User/UserHome/UserHome";
+import Statistics from "../pages/Dashboard/Admin/Statistics/Statistics";
 
 
 
@@ -59,10 +60,13 @@ const router = createBrowserRouter([
       {
         path:'profile',
         element:<Profile></Profile>
-      }
+      },
 
       // admin only routes
-      
+      {
+        path:'statistics',
+        element:<Statistics></Statistics>
+      }
     ]
   }
 ]);
