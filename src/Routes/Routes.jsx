@@ -8,6 +8,8 @@ import PrivateRoute from "./PrivateRoute";
 import BookParcel from "../pages/Dashboard/User/BookParcel/BookParcel";
 import MyParcel from "../pages/Dashboard/User/MyParcel/MyParcel";
 import ParcelDetails from "../pages/Dashboard/User/MyParcel/ParcelDetails";
+import Profile from "../pages/Dashboard/User/Profile/Profile";
+import UserHome from "../pages/Dashboard/User/UserHome/UserHome";
 
 
 
@@ -37,8 +39,8 @@ const router = createBrowserRouter([
     children: [
       // normal user routes
       {
-        path: 'userHome',
-        element: <Home></Home>
+        path: 'userhome',
+        element: <UserHome></UserHome>
       },
       {
         path:'book',
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
         element:<ParcelDetails></ParcelDetails>,
         loader:({params})=>fetch(`http://localhost:5000/parceldetail/${params.id}`)
 
+      },
+      {
+        path:'profile',
+        element:<Profile></Profile>
       }
 
       // admin only routes
