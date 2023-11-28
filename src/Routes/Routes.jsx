@@ -16,12 +16,13 @@ import AllParcel from "../pages/Dashboard/Admin/AllParcels/AllParcels";
 import AllDelaveryMen from "../pages/Dashboard/Admin/AllDelaveryMen/AllDelaveryMen";
 import Modal from "../pages/Dashboard/User/MyParcel/Modal";
 import AllUser from "../pages/Dashboard/Admin/AllUser/AllUser";
-
+import ErrorPage from "../pages/ErrorPage/ErrorPage"
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
         {
             path: '/',
