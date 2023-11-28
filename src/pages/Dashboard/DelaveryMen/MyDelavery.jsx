@@ -22,7 +22,26 @@ const MyDelavery = () => {
         },
     });
 
-
+    const handleCancel =async(id)=>{
+        const dataof={
+            status :'cancel'
+        }
+        const menuRes = await axiosSecure.patch(`/parcel/cancel/${id}`, dataof);
+        console.log(menuRes.data)
+        refetch();
+        if(menuRes.data.modifiedCount){
+            // show success popup
+            
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `parcel is Cancle.`,
+                showConfirmButton: false,
+                timer: 1500
+              });
+refetch()
+    }
+}
 
     return (
         <div className="">
@@ -38,22 +57,24 @@ const MyDelavery = () => {
                     {/* head */}
                     <thead>
                         <tr>
-                            <th></th>
+                            
                             <th>Booked User Name</th>
                             <th>Receivers Name</th>
                             <th>Booked User’s Phone</th>
                             <th>Requested Delivery Date</th>
-                            <th>Approximate Delivery Date</th>
-                            <th>Recievers phone number</th>
+                            <th>ApproximateDeliveryDate</th>
+                            <th>Recievers number</th>
                             <th>Receivers Address</th>
+                            <th>Status</th>
                             <th>Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         {
                             parcels?.map((user1, index) => (
                                 <tr key={user1._id}>
-                                    <th>{index + 1}</th>
+                                    
                                     <td>{user1.name}</td>
                                     <td>{user1.ReceiverName}</td>
                                     <td>{user1.phone}</td>
@@ -61,6 +82,13 @@ const MyDelavery = () => {
                                     <td>{user1?.delaveryDate}</td>
                                    <td>{user1.ReceiverPhone}</td>
                                     <td>{user1.parcelAddress}</td>
+                                    <td>{user1.status}</td>
+                                    <td>
+                                    {<><button onClick={()=>handleAdmin(user1._id)} className="btn btn-accent mb-1">View Location</button>
+                                    {user1.status=='cancel'?"":<button onClick={()=>handleCancel(user1._id)} className="btn btn-accent mb-1">Cancel</button>}
+                                    {user1.status=='delivered'|| user1.status=='cancel'?"":<button onClick={()=>handleDelivery(user1._id)} className="btn btn-accent ">Deliver</button>}
+                                    </>}
+                                    </td>
                                 </tr>
                             ))
                         }
