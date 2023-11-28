@@ -28,7 +28,8 @@ const SignUp = () => {
                             phone: data.Phone,
                             Role: data.Role,
                             delaveryCount:0,
-                            averageReview:0
+                            averageReview:5,
+                            parcelbook:0
 
                         }
                         console.log(userInfo)

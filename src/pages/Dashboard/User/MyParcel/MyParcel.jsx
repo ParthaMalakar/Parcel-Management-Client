@@ -78,8 +78,17 @@ const handleonSubmit = async(e) => {
                     showConfirmButton: false,
                     timer: 1500
                   });
+const dataup={
+    averageReview:ratting
+}
+                  const menuRes = await axiosSecure.put(`/user/update/${delaverMenId}`, dataup);
+                  console.log(menuRes.data)
 
-}}
+
+}
+
+
+}
     return (
         <div className="">
             <div className="flex justify-evenly my-4">

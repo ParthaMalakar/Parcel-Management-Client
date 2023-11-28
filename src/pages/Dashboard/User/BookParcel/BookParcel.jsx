@@ -32,7 +32,9 @@ const BookParcel = () => {
                     showConfirmButton: false,
                     timer: 1500
                   });
-            
+                 
+                                  const menuRes = await axiosSecure.put(`/user/parcel/${user.email}`);
+                                  console.log(menuRes.data)
         }
     };
     const calculatePrice = (e) => {

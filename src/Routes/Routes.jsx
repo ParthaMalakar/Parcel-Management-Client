@@ -15,6 +15,7 @@ import AdminHome from "../pages/Dashboard/Admin/AdminHome/AdminHome";
 import AllParcel from "../pages/Dashboard/Admin/AllParcels/AllParcels";
 import AllDelaveryMen from "../pages/Dashboard/Admin/AllDelaveryMen/AllDelaveryMen";
 import Modal from "../pages/Dashboard/User/MyParcel/Modal";
+import AllUser from "../pages/Dashboard/Admin/AllUser/AllUser";
 
 
 const router = createBrowserRouter([
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       },{
         path:'parcel/modal',
         element:<Modal></Modal>
+      },
+      {
+        path:'alluser',
+        element:<AllUser></AllUser>
       }
     ]
   }
