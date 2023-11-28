@@ -18,6 +18,7 @@ import Modal from "../pages/Dashboard/User/MyParcel/Modal";
 import AllUser from "../pages/Dashboard/Admin/AllUser/AllUser";
 import ErrorPage from "../pages/ErrorPage/ErrorPage"
 import MyDelavery from "../pages/Dashboard/DelaveryMen/MyDelavery";
+import MyReview from "../pages/Dashboard/DelaveryMen/MyReview/MyReview";
 
 const router = createBrowserRouter([
     {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
       {
         path:'mydelavery',
         element:<MyDelavery></MyDelavery>
+      },
+      {
+        path:'myreview',
+        element:<MyReview></MyReview>
       }
     ]
   }

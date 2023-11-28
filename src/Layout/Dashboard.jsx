@@ -20,7 +20,7 @@ const Dashboard = () => {
             {/* <Navbar></Navbar> */}
             <div className="flex">
                 {/* dashboard side bar */}
-                <div className="w-64 min-h-screen bg-amber-300">
+                <div className="md:w-64 md:min-h-screen bg-amber-300">
                     <ul className="menu p-4">
                         {
                             isAdmin &&
@@ -92,7 +92,7 @@ const Dashboard = () => {
                                 My Delivery List</NavLink>
                         </li>
                         <li>
-                            <NavLink className=" text-lg" to="/dashboard/cart">
+                            <NavLink className=" text-lg" to="/dashboard/myreview">
                                 <FaStreetView></FaStreetView>
                                 My Review </NavLink>
                         </li>

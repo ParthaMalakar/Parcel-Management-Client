@@ -42,7 +42,26 @@ const MyDelavery = () => {
 refetch()
     }
 }
-
+const handleDelivery =async(id)=>{
+    const dataof={
+        status :'delivered'
+    }
+    const menuRes = await axiosSecure.patch(`/parcel/cancel/${id}`, dataof);
+    console.log(menuRes.data)
+    refetch();
+    if(menuRes.data.modifiedCount){
+        // show success popup
+        
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `parcel is delivered.`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+refetch()
+}
+}
     return (
         <div className="">
             <div className="flex justify-evenly my-4">
@@ -85,7 +104,7 @@ refetch()
                                     <td>{user1.status}</td>
                                     <td>
                                     {<><button onClick={()=>handleAdmin(user1._id)} className="btn btn-accent mb-1">View Location</button>
-                                    {user1.status=='cancel'?"":<button onClick={()=>handleCancel(user1._id)} className="btn btn-accent mb-1">Cancel</button>}
+                                    {user1.status=='cancel'||user1.status=='delivered'?"":<button onClick={()=>handleCancel(user1._id)} className="btn btn-accent mb-1">Cancel</button>}
                                     {user1.status=='delivered'|| user1.status=='cancel'?"":<button onClick={()=>handleDelivery(user1._id)} className="btn btn-accent ">Deliver</button>}
                                     </>}
                                     </td>
