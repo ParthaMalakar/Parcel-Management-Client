@@ -13,6 +13,7 @@ import UserHome from "../pages/Dashboard/User/UserHome/UserHome";
 import Statistics from "../pages/Dashboard/Admin/Statistics/Statistics";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome/AdminHome";
 import AllParcel from "../pages/Dashboard/Admin/AllParcels/AllParcels";
+import AllDelaveryMen from "../pages/Dashboard/Admin/AllDelaveryMen/AllDelaveryMen";
 
 
 const router = createBrowserRouter([
@@ -75,6 +76,9 @@ const router = createBrowserRouter([
       {
         path:'allparcel',
         element:<AllParcel></AllParcel>
+      },{
+        path:'alldelavery',
+        element:<AllDelaveryMen></AllDelaveryMen>
       }
     ]
   }

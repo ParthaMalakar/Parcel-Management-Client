@@ -41,7 +41,7 @@ const Dashboard = () => {
                                         All Users</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="text-lg" to="/dashboard/bookings">
+                                    <NavLink className="text-lg" to="/dashboard/alldelavery">
                                     <FaUsers></FaUsers>
                                         All Delivery Men</NavLink>
                                 </li>
