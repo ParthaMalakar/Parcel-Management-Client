@@ -5,21 +5,22 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 const AllUser = () => {
-    const [number, setNumber] = useState(0);
+    const [users, setUsers] = useState([]);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
     console.log('ggggg', user)
-    const { data: users = [], refetch } = useQuery({
-        queryKey: ['parcel'],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/users`, {
-            });
-            return res.data;
-        },
-    });
+    // const { data: users = [], refetch } = useQuery({
+    //     queryKey: ['parcel'],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/users`, {
+    //         });
+    //         return res.data;
+    //     },
+    // });
 
     const handleAdmin =async(id)=>{
         const dataof={
@@ -41,9 +42,68 @@ const AllUser = () => {
               refetch()
 
     }
+}
+    const handleMen =async(id)=>{
+        const dataof={
+            Role :'DeliveryMen'
+        }
+        const menuRes = await axiosSecure.patch(`/user/admin/${id}`, dataof);
+        console.log(menuRes.data)
+        refetch();
+        if(menuRes.data.modifiedCount){
+            // show success popup
+            
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `User appointed to DeliveryMen.`,
+                showConfirmButton: false,
+                timer: 1500
+              });
+              refetch()
 
-    
     }
+
+    }
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const [count, setCount] = useState(0)
+
+
+    const numberOfPages = Math.ceil(count / itemsPerPage);
+    const pages = [...Array(numberOfPages).keys()];
+    useEffect(() => {
+        fetch(`http://localhost:5000/users?page=${currentPage}&size=${itemsPerPage}`)
+            .then(res => res.json())
+            .then(data => setUsers(data))
+    }, [currentPage, itemsPerPage])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/usercount')
+            .then(res => res.json())
+            .then(data => setCount(data.count))
+    }, [])
+    const handleItemsPerPage = e => {
+        const val = parseInt(e.target.value);
+        console.log(val);
+        setItemsPerPage(val);
+        setCurrentPage(0);
+    }
+
+    const handlePrevPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    }
+
+    const handleNextPage = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1);
+        }
+    }
+
+
+
     return (
         <div className="">
             <div className="flex justify-evenly my-4">
@@ -79,7 +139,7 @@ const AllUser = () => {
                                    <td>
                                    {user1.Role =='admin'?
                                    '':<><button onClick={()=>handleAdmin(user1._id)} className="btn btn-accent ml-3">Make Admin</button>
-                                    <button onClick={()=>handleMen(user1._id)} className="btn btn-accent ml-3">Make DelaveryMen</button></>}
+                                    {user1.Role =='DeliveryMen'?"":<button onClick={()=>handleMen(user1._id)} className="btn btn-accent ml-3">Make DelaveryMen</button>}</>}
                                    </td>
                                     
                                 </tr>
@@ -87,6 +147,23 @@ const AllUser = () => {
                         }
                     </tbody>
                 </table>
+            </div>
+            <div className='pagination text-center pb-6'>
+                <button className='btn btn-ghost font-semibold  text-xl' onClick={handlePrevPage}><AiOutlineArrowLeft></AiOutlineArrowLeft></button>
+                {
+                    pages.map(page => <button
+                        className={`btn btn-outline  ${currentPage === page ? 'selected' : undefined}`}
+                        onClick={() => setCurrentPage(page)}
+                        key={page}
+                    >{page}</button>)
+                }
+                <button className='btn btn-ghost font-semibold text-xl' onClick={handleNextPage}><AiOutlineArrowRight></AiOutlineArrowRight></button>
+                <select value={itemsPerPage} onChange={handleItemsPerPage} name="" id="">
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="12">12</option>
+                    <option value="15">15</option>
+                </select>
             </div>
         </div>
     );
