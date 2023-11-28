@@ -87,7 +87,7 @@ const Dashboard = () => {
                                 Delavary man Home</NavLink>
                         </li>
                         <li>
-                            <NavLink className=" text-lg" to="/dashboard/history">
+                            <NavLink className=" text-lg" to="/dashboard/mydelavery">
                                 <FaCalendar></FaCalendar>
                                 My Delivery List</NavLink>
                         </li>

@@ -17,6 +17,7 @@ import AllDelaveryMen from "../pages/Dashboard/Admin/AllDelaveryMen/AllDelaveryM
 import Modal from "../pages/Dashboard/User/MyParcel/Modal";
 import AllUser from "../pages/Dashboard/Admin/AllUser/AllUser";
 import ErrorPage from "../pages/ErrorPage/ErrorPage"
+import MyDelavery from "../pages/Dashboard/DelaveryMen/MyDelavery";
 
 const router = createBrowserRouter([
     {
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path:'alluser',
         element:<AllUser></AllUser>
+      },
+      {
+        path:'mydelavery',
+        element:<MyDelavery></MyDelavery>
       }
     ]
   }
