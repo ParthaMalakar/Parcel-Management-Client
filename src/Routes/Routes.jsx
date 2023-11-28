@@ -11,7 +11,8 @@ import ParcelDetails from "../pages/Dashboard/User/MyParcel/ParcelDetails";
 import Profile from "../pages/Dashboard/User/Profile/Profile";
 import UserHome from "../pages/Dashboard/User/UserHome/UserHome";
 import Statistics from "../pages/Dashboard/Admin/Statistics/Statistics";
-
+import AdminHome from "../pages/Dashboard/Admin/AdminHome/AdminHome";
+import AllParcel from "../pages/Dashboard/Admin/AllParcels/AllParcels";
 
 
 const router = createBrowserRouter([
@@ -66,6 +67,14 @@ const router = createBrowserRouter([
       {
         path:'statistics',
         element:<Statistics></Statistics>
+      },
+      {
+        path:'adminHome',
+        element:<AdminHome></AdminHome>
+      },
+      {
+        path:'allparcel',
+        element:<AllParcel></AllParcel>
       }
     ]
   }

@@ -197,7 +197,7 @@ const ParcelDetails = () => {
                         <input
                             type="text"
                             placeholder="Price"
-                            value={`${price}Tk`}
+                           
                             defaultValue={parcel.price}
                             readOnly
                             {...register('price', { required: true })}

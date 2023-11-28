@@ -22,6 +22,7 @@ console.log('ggggg',user)
             
         }
     })
+    
     const filteredParcels = selectedFilter === 'all' ? parcels : parcels.filter(user1 => user1.status === selectedFilter);
     const handleCancle =async(id)=>{
         const dataof={
@@ -101,9 +102,9 @@ const onSubmit = async(data) => {
                                 <th>{index + 1}</th>
                                 <td>{user1.type}</td>
                                 <td>{user1.parcelDate}</td>
-                                <td></td>
+                                <td>{user1.delaveryDate}</td>
                                 <td>{user1.bookingDate}</td>
-                                <td>{}</td>
+                                <td>{user1.delaverMenId}</td>
                                 <td>{user1.status}</td>
                                 {
                                     user1.status == 'pending' ? <>

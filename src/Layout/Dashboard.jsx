@@ -31,7 +31,7 @@ const Dashboard = () => {
                                         Admin Home</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className=" text-lg" to="/dashboard/addItems">
+                                    <NavLink className=" text-lg" to="/dashboard/allparcel">
                                        <MdOutlineClearAll></MdOutlineClearAll>
                                         All Parcels</NavLink>
                                 </li>
