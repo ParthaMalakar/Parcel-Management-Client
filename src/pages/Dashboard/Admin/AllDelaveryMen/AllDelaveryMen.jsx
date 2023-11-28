@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 
 const AllDelaveryMen = () => {
-    
+    const [number, setNumber] = useState(0);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
@@ -21,7 +21,8 @@ const AllDelaveryMen = () => {
         },
     });
 
-   
+
+
     return (
         <div className="">
             <div className="flex justify-evenly my-4">
@@ -51,8 +52,8 @@ const AllDelaveryMen = () => {
                                     <th>{index + 1}</th>
                                     <td>{user1.name}</td>
                                     <td>{user1.phone}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{user1?.delaveryCount}</td>
+                                    <td>{user1?.averageReview}</td>
                                    
                                     
                                 </tr>

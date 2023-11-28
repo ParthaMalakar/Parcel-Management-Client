@@ -22,10 +22,13 @@ const SignUp = () => {
                     .then(() => {
                         // create user entry in the database
                         const userInfo = {
+                            photoURL:data.photoURL,
                             name: data.name,
                             email: data.email,
                             phone: data.Phone,
-                            Role: data.Role
+                            Role: data.Role,
+                            delaveryCount:0,
+                            averageReview:0
 
                         }
                         console.log(userInfo)

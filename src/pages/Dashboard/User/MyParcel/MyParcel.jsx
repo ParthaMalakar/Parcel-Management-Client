@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 
 const MyParcel = () => {
     const [selectedFilter, setSelectedFilter] = useState('all');
+    const [currentUser, setCurentUser] = useState('');
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
@@ -22,7 +23,9 @@ console.log('ggggg',user)
             
         }
     })
-    
+    const handle = (id) => {
+        setCurentUser(id)
+    }
     const filteredParcels = selectedFilter === 'all' ? parcels : parcels.filter(user1 => user1.status === selectedFilter);
     const handleCancle =async(id)=>{
         const dataof={
@@ -44,8 +47,25 @@ console.log('ggggg',user)
 
     }
 }
-const onSubmit = async(data) => {
-    console.log(data)
+const handleonSubmit = async(e) => {
+    e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const id = form.get('id');
+        const name = form.get('name');
+        const photo = form.get('photo');
+        const ratting = form.get('ratting');
+        const feedback = form.get('feedback');
+        const delaverMenId = form.get('did');
+        const data = {
+           id,
+            name,
+            photo,
+            ratting,
+            feedback,
+            delaverMenId
+        }
+
+
     const menuRes = await axiosSecure.post('/review', data);
             console.log(menuRes.data)
             if(menuRes.data.insertedId){
@@ -115,57 +135,66 @@ const onSubmit = async(data) => {
                                 {
                                      user1.status == 'delivered' ? <>
                                      {/* Open the modal using document.getElementById('ID').showModal() method */}
-<button className="btn btn-accent" onClick={()=>document.getElementById('my_modal_1').showModal()}>Review</button>
-<dialog id="my_modal_1" className="modal">
+                                     <button
+                                            className="btn btn-accent"
+                                            onClick={() => {
+                                                handle(user1._id);
+                                                document.getElementById(`my_modal_${index}`).showModal();
+                                              }}                                            >
+                                            Review
+                                        </button>
+                                        <dialog id={`my_modal_${index}`} className="modal">
+                                            
   <div className="modal-box">
     <h3 className="font-bold text-center text-lg">Give Review</h3>
-    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input type="text"  {...register("name", { required: true })} name="name" placeholder="Name" defaultValue={user.displayName} className="input input-bordered" />
-                                {errors.name && <span className="text-red-600">Name is required</span>}
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Photo URL</span>
-                                </label>
-                                <input type="text"  {...register("photoURL", { required: true })} placeholder="Photo URL" defaultValue={user.photoURL}  className="input input-bordered" />
-                                {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Rating</span>
-                                </label>
-                                <input type="text"  {...register("rating")} name="rating" placeholder="Out of 5" className="input input-bordered" />
-                                {errors.rating && <span className="text-red-600">Rating is required</span>}
-                            </div>
-                           
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">FeedBack</span>
-                                </label>
-                                <input type="text"  {...register("feedBack", { required: true })} name="feedBack" placeholder="feedBack" className="input input-bordered" />
-                                {errors.feedBack && <span className="text-red-600">feedBack is required</span>}
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Delavery Men Id</span>
-                                </label>
-                                <input type="text"  {...register("delaveryId", { required: true })} name="delaveryId" placeholder="Delavery men Id" defaultValue={user1.delaveryMenId} className="input input-bordered" />
-                                {errors.delaveryId && <span className="text-red-600">DelaverMenId is required</span>}
-                            </div>
-                            
-                            <div className="form-control mt-6">
-                                <input className="btn btn-primary" type="submit" value="Submit" />
-                            </div>
-                        </form>
-                        <form method="dialog">
+    <form onSubmit={handleonSubmit}  className=" md:w-3/4 lg:w-1/2 mx-auto">
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">Name</span>
+                        </label>
+                        <input type="text" required name="name" placeholder="Name" defaultValue={user.displayName} className="input input-bordered" />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">Photo URL</span>
+                        </label>
+                        <input type="text" required name="photo" placeholder="Photo URL" className="input input-bordered" defaultValue={user.photoURL} />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">Ratting</span>
+                        </label>
+                        <input type="text" required name="ratting" placeholder="Ratting"  className="input input-bordered" />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">FeedBack</span>
+                        </label>
+                        <input type="text" required name="feedback" placeholder="FeedBack" className="input input-bordered" />
+                        
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">Parcel Id</span>
+                        </label>
+                        <input type="text" required name="id" placeholder="id" defaultValue={user1._id} className="input input-bordered" />
+                        
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">Delavery Men Id</span>
+                        </label>
+                        <input type="text" required name="did" placeholder=" Delavery Men id" defaultValue={user1.delaverMenId} className="input input-bordered" />
+                        
+                    </div>
+                    <div className="form-control mt-6">
+                        <button className="btn bg-red-400 text-white font-bold">Submit</button>
+                    </div>
+                </form>
+                <form method="dialog">
         {/* if there is a button in form, it will close the modal */}
         <button className="btn">Close</button>
       </form>
-    
   </div>
 </dialog>
                                      </> : ''
