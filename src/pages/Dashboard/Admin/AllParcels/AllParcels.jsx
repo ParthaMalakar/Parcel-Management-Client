@@ -133,14 +133,14 @@ const AllParcel = () => {
                                     <td>{user1.price}</td>
                                     <td>{user1.status}</td>
                                     <td>
-                                        <button
+                                        {user1.status =='pending'&&<button
                                             className="btn btn-accent"
                                             onClick={() => {
                                                 handle(user1._id);
                                                 document.getElementById(`my_modal_${index}`).showModal();
                                               }}                                            >
                                             Manage
-                                        </button>
+                                        </button>}
                                         <dialog id={`my_modal_${index}`} className="modal">
                                             <div className="modal-box">
                                                 <h3 className="font-bold text-center text-lg">Manage</h3>

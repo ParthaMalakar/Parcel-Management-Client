@@ -59,6 +59,8 @@ const handleDelivery =async(id)=>{
             showConfirmButton: false,
             timer: 1500
           });
+          const menuRes = await axiosSecure.put(`/user/delaveried/${user.email}`);
+          console.log(menuRes.data)
 refetch()
 }
 }

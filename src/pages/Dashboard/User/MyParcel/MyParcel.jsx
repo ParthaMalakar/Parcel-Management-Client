@@ -23,6 +23,7 @@ console.log('ggggg',user)
             
         }
     })
+    const totalPrice = parcels.reduce((total, item) => total + parseFloat(item.price), 0);
     const handle = (id) => {
         setCurentUser(id)
     }
@@ -92,8 +93,10 @@ const dataup={
     return (
         <div className="">
             <div className="flex justify-evenly my-4">
-                <h2 className="text-3xl">All My Booked Parcel</h2>
-                <h2 className="text-3xl">Total Parcel: {parcels.length}</h2>
+                <h2 className="text-3xl">All My Booked Parcel:{parcels.length}</h2>
+                <h2 className="text-3xl">Total Price:{totalPrice} </h2>
+                <button className="btn btn-accent ml-3">Pay</button>
+
             </div>
             
             <div>
@@ -137,8 +140,8 @@ const dataup={
                                 <td>{user1.status}</td>
                                 {
                                     user1.status == 'pending' ? <>
-                                    <Link to={`/dashboard/details/${user1._id}`} className="btn btn-accent">Update</Link>
-                                    <button onClick={()=>handleCancle(user1._id)} className="btn btn-accent ml-3">Cancel</button></> : ''
+                                    <Link to={`/dashboard/details/${user1._id}`} className="btn btn-accent mb-1">Update</Link>
+                                    <button onClick={()=>handleCancle(user1._id)} className="btn btn-accent ">Cancel</button></> : ''
 
                                 }
                                 {
@@ -208,7 +211,6 @@ const dataup={
 </dialog>
                                      </> : ''
                                 }
-                                <button className="btn btn-accent ml-3">Pay</button>
                                 
                             </tr>)
                         }
