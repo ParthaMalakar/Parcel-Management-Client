@@ -95,7 +95,10 @@ const dataup={
             <div className="flex justify-evenly my-4">
                 <h2 className="text-3xl">All My Booked Parcel:{parcels.length}</h2>
                 <h2 className="text-3xl">Total Price:{totalPrice} </h2>
-                <button className="btn btn-accent ml-3">Pay</button>
+               { parcels.length?
+               <Link to={"/dashboard/payment"}><button  className="btn btn-accent ml-3">Pay</button></Link>
+            :<button disabled className="btn btn-accent ml-3">Pay</button>
+            }
 
             </div>
             

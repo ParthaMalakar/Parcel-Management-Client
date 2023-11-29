@@ -19,6 +19,7 @@ import AllUser from "../pages/Dashboard/Admin/AllUser/AllUser";
 import ErrorPage from "../pages/ErrorPage/ErrorPage"
 import MyDelavery from "../pages/Dashboard/DelaveryMen/MyDelavery";
 import MyReview from "../pages/Dashboard/DelaveryMen/MyReview/MyReview";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -68,7 +69,11 @@ const router = createBrowserRouter([
         path:'profile',
         element:<Profile></Profile>
       },
-
+      {
+        path:'payment',
+        element:<Payment></Payment>
+      }
+      ,
       // admin only routes
       {
         path:'statistics',

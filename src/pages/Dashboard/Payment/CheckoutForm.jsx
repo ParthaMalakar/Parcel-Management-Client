@@ -1,24 +1,33 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useCart from "../../../hooks/useCart";
-import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 
 const CheckoutForm = () => {
+    const { user } = useContext(AuthContext);
+    const { data: parcels = [], refetch } = useQuery({
+        queryKey: ['parcel'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/parcel/${user.email}`);
+            return res.data;
+            
+        }
+    })
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('');
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
-    const [cart, refetch] = useCart();
+    
+    
     const navigate = useNavigate();
 
-    const totalPrice = cart.reduce((total, item) => total + item.price, 0)
+    const totalPrice = parcels.reduce((total, item) => total + parseFloat(item.price), 0)
 
     useEffect(() => {
         if (totalPrice > 0) {
@@ -84,8 +93,7 @@ const CheckoutForm = () => {
                     price: totalPrice,
                     transactionId: paymentIntent.id,
                     date: new Date(), // utc date convert. use moment js to 
-                    cartIds: cart.map(item => item._id),
-                    menuItemIds: cart.map(item => item.menuId),
+                    ParcelIds: parcels.map(item => item._id),
                     status: 'pending'
                 }
 
