@@ -23,6 +23,7 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory"
 import Success from "../pages/Dashboard/Payment/Success";
 import AdminPrivateRoute from "./AdminPrivateRoute";
+import DelRoute from "./DelRoute";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -109,11 +110,11 @@ const router = createBrowserRouter([
       },
       {
         path:'mydelavery',
-        element:<MyDelavery></MyDelavery>
+        element:<DelRoute><MyDelavery></MyDelavery></DelRoute>
       },
       {
         path:'myreview',
-        element:<MyReview></MyReview>
+        element:<DelRoute><MyReview></MyReview></DelRoute>
       }
     ]
   }
