@@ -21,6 +21,7 @@ import MyDelavery from "../pages/Dashboard/DelaveryMen/MyDelavery";
 import MyReview from "../pages/Dashboard/DelaveryMen/MyReview/MyReview";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory"
+import Success from "../pages/Dashboard/Payment/Success";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path:'/dashboard/paymentHistory',
         element:<PaymentHistory></PaymentHistory>
+      },
+      {
+          path:'success',
+          element:<Success></Success>
       },
       // admin only routes
       {
