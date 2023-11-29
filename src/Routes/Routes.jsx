@@ -20,7 +20,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage"
 import MyDelavery from "../pages/Dashboard/DelaveryMen/MyDelavery";
 import MyReview from "../pages/Dashboard/DelaveryMen/MyReview/MyReview";
 import Payment from "../pages/Dashboard/Payment/Payment";
-
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory"
 const router = createBrowserRouter([
     {
       path: "/",
@@ -74,6 +74,10 @@ const router = createBrowserRouter([
         element:<Payment></Payment>
       }
       ,
+      {
+        path:'/dashboard/paymentHistory',
+        element:<PaymentHistory></PaymentHistory>
+      },
       // admin only routes
       {
         path:'statistics',

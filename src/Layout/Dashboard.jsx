@@ -76,7 +76,11 @@ const Dashboard = () => {
                                         <FaAd></FaAd>
                                         My Profile</NavLink>
                                 </li>
-                               
+                                <li>
+                                    <NavLink className=" text-lg" to="/dashboard/paymentHistory">
+                                        <FaAd></FaAd>
+                                        Payment History</NavLink>
+                                </li>
                             </>
                         }
                         { isDelivary && 
