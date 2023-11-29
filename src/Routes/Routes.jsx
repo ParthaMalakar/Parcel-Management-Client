@@ -22,6 +22,7 @@ import MyReview from "../pages/Dashboard/DelaveryMen/MyReview/MyReview";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory"
 import Success from "../pages/Dashboard/Payment/Success";
+import AdminPrivateRoute from "./AdminPrivateRoute";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -86,18 +87,18 @@ const router = createBrowserRouter([
       // admin only routes
       {
         path:'statistics',
-        element:<Statistics></Statistics>
+        element:<AdminPrivateRoute><Statistics></Statistics></AdminPrivateRoute>
       },
       {
         path:'adminHome',
-        element:<AdminHome></AdminHome>
+        element:<AdminPrivateRoute><AdminHome></AdminHome></AdminPrivateRoute>
       },
       {
         path:'allparcel',
-        element:<AllParcel></AllParcel>
+        element:<AdminPrivateRoute><AllParcel></AllParcel></AdminPrivateRoute>
       },{
         path:'alldelavery',
-        element:<AllDelaveryMen></AllDelaveryMen>
+        element:<AdminPrivateRoute><AllDelaveryMen></AllDelaveryMen></AdminPrivateRoute>
       },{
         path:'parcel/modal',
         element:<Modal></Modal>

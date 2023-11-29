@@ -8,19 +8,19 @@ import { useForm } from "react-hook-form";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 const AllUser = () => {
-    const [users, setUsers] = useState([]);
+    const [userrs, setUserrs] = useState([]);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
     console.log('ggggg', user)
-    // const { data: users = [], refetch } = useQuery({
-    //     queryKey: ['parcel'],
-    //     queryFn: async () => {
-    //         const res = await axiosSecure.get(`/users`, {
-    //         });
-    //         return res.data;
-    //     },
-    // });
+    const { data: users = [], refetch } = useQuery({
+        queryKey: ['parcel'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`users?page=${currentPage}&size=${itemsPerPage}`, {
+            });
+            return res.data;
+        },
+    });
 
     const handleAdmin =async(id)=>{
         const dataof={
@@ -72,11 +72,11 @@ const AllUser = () => {
 
     const numberOfPages = Math.ceil(count / itemsPerPage);
     const pages = [...Array(numberOfPages).keys()];
-    useEffect(() => {
-        fetch(`http://localhost:5000/users?page=${currentPage}&size=${itemsPerPage}`)
-            .then(res => res.json())
-            .then(data => setUsers(data))
-    }, [currentPage, itemsPerPage])
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/users?page=${currentPage}&size=${itemsPerPage}`)
+    //         .then(res => res.json())
+    //         .then(data => setUsers(data))
+    // }, [currentPage, itemsPerPage])
 
     useEffect(() => {
         fetch('http://localhost:5000/usercount')
