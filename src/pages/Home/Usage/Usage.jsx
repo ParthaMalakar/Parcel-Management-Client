@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import CountUp from 'react-countup';
 const Usage = () => {
     const [count, setCount] = useState(0)
     const [Man, setMen] = useState(0)
@@ -24,13 +24,19 @@ const Usage = () => {
     return (
         <div className='grid grid-cols-3 max-w-5xl mx-auto gap-3'>
             <div className='p-8 bg-red-300 font-bold text-xl'>
-              <h1>Number of Parcel Booked :{countdelavery}</h1>
+              <h1>Number of Parcel Booked :
+              <CountUp end={countdelavery} duration={2} />
+                </h1>
             </div>
             <div className='p-8 bg-red-300 font-bold text-xl'>
-                <h1>Number of Parcel Delivered:{Man}</h1>
+                <h1>Number of Parcel Delivered:
+                <CountUp end={Man} duration={2} />
+                    </h1>
             </div>
             <div className='p-8 bg-red-300 font-bold text-xl'>
-                <h2>Number of People Using Your App: {count}</h2>
+                <h2>Number of People Using Your App:
+                <CountUp end={count} duration={2} />
+                     </h2>
             </div>
         </div>
     );
