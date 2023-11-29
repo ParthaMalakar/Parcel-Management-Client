@@ -22,7 +22,7 @@ const Usage = () => {
             .then(data => setMen(data.man))
     }, [])
     return (
-        <div className='grid grid-cols-3 max-w-5xl mx-auto gap-3'>
+        <div className='grid grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto gap-3'>
             <div className='p-8 bg-red-300 font-bold text-xl'>
               <h1>Number of Parcel Booked :
               <CountUp end={countdelavery} duration={2} />

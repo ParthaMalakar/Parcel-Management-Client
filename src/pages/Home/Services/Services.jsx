@@ -7,10 +7,10 @@ const Services = () => {
             <div className="mx-auto text-center md:w-4/12 my-8">
                 <p className="text-gray-600 mb-2 text-3xl"><i>---Our Features Section---</i></p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 ">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 ">
                 <div className="card mx-auto mt-4 bg-base-100 shadow-2xl">
                     <figure className="px-1 pt-3">
-<AiTwotoneSafetyCertificate className="rounded-xl md:h-[200px] md:w-[400px]"></AiTwotoneSafetyCertificate>
+<AiTwotoneSafetyCertificate className="rounded-xl h-[200px] w-[400px]"></AiTwotoneSafetyCertificate>
                     </figure>
                     <div className="card-body">
                         <h2 className="card-title font-bold mx-auto"> Secure Shipments</h2>
