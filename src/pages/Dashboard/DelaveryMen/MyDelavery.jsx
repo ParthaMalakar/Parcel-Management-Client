@@ -6,11 +6,17 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../provider/AuthProvider";
+import ModalComponent from "./ModalComponent";
+import MapComponent from "./MapComponent";
 
 const MyDelavery = () => {
     const [number, setNumber] = useState(0);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
+  const deliveryLatitude = 40.7128; 
+  const deliveryLongitude = -74.0060; // Replace with your delivery longitude
+
+  
     const { user } = useContext(AuthContext);
     console.log('ggggg', user)
     const { data: parcels = [], refetch } = useQuery({
@@ -71,7 +77,7 @@ refetch()
                 <h2 className="text-3xl">Total My Devavery: {parcels.length}</h2>
             </div>
 
-            
+         
 
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
@@ -104,8 +110,16 @@ refetch()
                                    <td>{user1.ReceiverPhone}</td>
                                     <td>{user1.parcelAddress}</td>
                                     <td>{user1.status}</td>
+                                    
                                     <td>
-                                    {<><button onClick={()=>handleAdmin(user1._id)} className="btn btn-accent mb-1">View Location</button>
+                                    {<><div>
+                                        <div className="hidden">
+     <MapComponent latitude={deliveryLatitude}
+        longitude={deliveryLongitude}></MapComponent>
+     </div>                             
+      <Link to={`map/${user1._id}`}   className="btn btn-accent mb-1">See Location</Link>
+     
+    </div>
                                     {user1.status=='cancel'||user1.status=='delivered'?"":<button onClick={()=>handleCancel(user1._id)} className="btn btn-accent mb-1">Cancel</button>}
                                     {user1.status=='delivered'|| user1.status=='cancel'?"":<button onClick={()=>handleDelivery(user1._id)} className="btn btn-accent ">Deliver</button>}
                                     </>}
@@ -116,6 +130,7 @@ refetch()
                     </tbody>
                 </table>
             </div>
+         
         </div>
     );
 };

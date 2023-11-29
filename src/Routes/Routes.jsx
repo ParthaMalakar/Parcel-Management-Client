@@ -24,6 +24,7 @@ import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory"
 import Success from "../pages/Dashboard/Payment/Success";
 import AdminPrivateRoute from "./AdminPrivateRoute";
 import DelRoute from "./DelRoute";
+import MapComponent from "../pages/Dashboard/DelaveryMen/MapComponent";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -115,6 +116,12 @@ const router = createBrowserRouter([
       {
         path:'myreview',
         element:<DelRoute><MyReview></MyReview></DelRoute>
+      },
+      {
+        path:'mydelavery/map/:id',
+        element:<MapComponent></MapComponent>,
+        loader:({params})=>fetch(`http://localhost:5000/parceldetail/${params.id}`)
+
       }
     ]
   }
